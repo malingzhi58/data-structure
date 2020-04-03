@@ -10,6 +10,7 @@ public class SLList2 {
         }
     }
 
+    //antoehr thing
     public IntNode2 first;
 
     public SLList2(int x) {
