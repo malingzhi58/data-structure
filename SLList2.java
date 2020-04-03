@@ -11,6 +11,7 @@ public class SLList2 {
     }
 
     //antoehr thing
+    // add somthing new
     public IntNode2 first;
 
     public SLList2(int x) {
