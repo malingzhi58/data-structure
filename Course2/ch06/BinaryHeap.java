@@ -84,11 +84,10 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> {
         return currentSize == 0;
     }
 
-    public AnyType deleteMin() {
-//        if (isEmpty()) {
-//            throw new Exception();
-//        }
-
+    public AnyType deleteMin() throws Exception {
+        if (isEmpty()) {
+            throw new Exception();
+        }
         AnyType minItem = array[1];
         array[1] = array[currentSize--];
         percolateDown(1);;

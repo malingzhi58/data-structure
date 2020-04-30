@@ -1,28 +1,20 @@
-package ch07;
+package Course2.ch07;
 
-import ch07.Random;
+import Course2.ch07.Random;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static java.lang.Integer.min;
 
 /**
  * Created by cookfront on 2017/3/18.
  */
 public final class Sort {
-    public static <AnyType extends Comparable<? super AnyType>>
-    void insertionSort(AnyType[] arr) {
-        int len = arr.length;
 
-        int i;
-        int j;
 
-        for (i = 1; i < len; i++) {
-            AnyType temp = arr[i];
-            for (j = i; j > 0 && temp.compareTo(arr[j - 1]) < 0; j--) {
-                arr[j] = arr[j - 1];
-            }
-            arr[j] = temp;
-        }
-    }
-
-    public static <AnyType extends Comparable<? super AnyType>>
+    public static <AnyType extends Comparable <? super AnyType>>
     void shellSort(AnyType[] arr) {
         int len = arr.length;
 
@@ -41,13 +33,13 @@ public final class Sort {
         }
     }
 
-    public static <AnyType extends Comparable<? super AnyType>>
+    public static <AnyType extends Comparable <? super AnyType>>
     void mergeSort(AnyType[] arr) {
         AnyType[] tmpArray = (AnyType[]) new Comparable[arr.length];
         mergeSort(arr, tmpArray, 0, arr.length - 1);
     }
 
-    private static <AnyType extends Comparable<? super AnyType>>
+    private static <AnyType extends Comparable <? super AnyType>>
     void mergeSort(AnyType[] arr, AnyType[] tmpArray, int left, int right) {
         if (left < right) {
             int center = (left + right) / 2;
@@ -56,8 +48,20 @@ public final class Sort {
             merge(arr, tmpArray, left, center + 1, right);
         }
     }
-
-    private static <AnyType extends Comparable<? super AnyType>>
+    private static <AnyType extends Comparable <? super AnyType>>
+    void mergeSort2(AnyType[] a, AnyType[] tmpArray, int left, int right) {
+        int n = a.length;
+        for (int subListSize = 1; subListSize < n; subListSize *= 2) {
+            int part1Start = 0;
+            while (part1Start + subListSize < n) {
+                int part2Start = part1Start + subListSize;
+                int part2End = min(n - 1, part2Start + subListSize - 1);
+                merge(a, tmpArray, part1Start, part2Start, part2End);
+                part1Start = part2End + 1;
+            }
+        }
+    }
+    private static <AnyType extends Comparable <? super AnyType>>
     void merge(AnyType[] arr, AnyType[] tmpArray, int leftPos, int rightPos, int rightEnd) {
         int leftEnd = rightPos - 1;
         int tmpPos = leftPos;
@@ -85,12 +89,28 @@ public final class Sort {
         }
     }
 
-    public static <AnyType extends Comparable<? super AnyType>>
+    public static <AnyType extends Comparable <? super AnyType>>
+    void insertionSort(AnyType[] arr) {
+        int len = arr.length;
+
+        int i;
+        int j;
+
+        for (i = 1; i < len; i++) {
+            AnyType temp = arr[i];
+            for (j = i; j > 0 && temp.compareTo(arr[j - 1]) < 0; j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[j] = temp;
+        }
+    }
+
+    public static <AnyType extends Comparable <? super AnyType>>
     void quickSort(AnyType[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
 
-    private static <AnyType extends Comparable<? super AnyType>>
+    private static <AnyType extends Comparable <? super AnyType>>
     void quickSort(AnyType[] a, int left, int right) {
         if (left == right) {
             return;
@@ -101,7 +121,9 @@ public final class Sort {
             // Begin partitioning
             int i = left, j = right - 1;
             for (; ; ) {
-                while (a[++i].compareTo(pivot) < 0) {
+                while (a[++i].compareTo(pivot) < 0)
+                {
+
                 }
                 while (a[--j].compareTo(pivot) > 0) {
                 }
@@ -120,7 +142,7 @@ public final class Sort {
         }
     }
 
-    private static <AnyType extends Comparable<? super AnyType>>
+    private static <AnyType extends Comparable <? super AnyType>>
     void insertionSort(AnyType[] a, int left, int right) {
         for (int p = left + 1; p <= right; p++) {
             AnyType tmp = a[p];
@@ -132,7 +154,7 @@ public final class Sort {
         }
     }
 
-    private static <AnyType extends Comparable<? super AnyType>>
+    private static <AnyType extends Comparable <? super AnyType>>
     AnyType median3(AnyType[] a, int left, int right) {
         int center = (left + right) / 2;
         if (a[center].compareTo(a[left]) < 0)
@@ -153,9 +175,9 @@ public final class Sort {
         a[index2] = tmp;
     }
 
-    private static final int NUM_ITEMS = 1000;
+    private static final int NUM_ITEMS = 50;
     private static int theSeed = 1;
-    private static final int CUTOFF = 3;
+    private static final int CUTOFF = 1;
 
     private static void checkSort(Integer[] a) {
         for (int i = 0; i < a.length; i++)
@@ -165,25 +187,48 @@ public final class Sort {
     }
 
     public static void main(String... args) {
-        Integer[] arr = new Integer[NUM_ITEMS];
+        Integer[] arr2 = new Integer[NUM_ITEMS];
 
-        for (int i = 0; i < arr.length; i++)
-            arr[i] = i;
+//        for (int i = 0; i < arr.length; i++)
+//            arr[i] = i;
 
-        Random.permute(arr);
-        insertionSort(arr);
-        checkSort(arr);
+//        Random.permute(arr);
+//        insertionSort(arr);
+//        checkSort(arr);
 
-        Random.permute(arr);
-        shellSort(arr);
-        checkSort(arr);
+//        Random.permute(arr);
+//        shellSort(arr);
+//        checkSort(arr);
 
-        Random.permute(arr);
-        mergeSort(arr);
-        checkSort(arr);
+//        Random.permute(arr);
+//        mergeSort(arr);
+//        checkSort(arr);
 
-        Random.permute(arr);
+
+//        {1, 4, 8, 10, 3, 29, 21, 7, 4};
+//        {1, 21,56,81,100,3,102,71,45,22,5};
+        Integer[] arr = {1, 21,56,3,81,45,5};
+//        Random.permute(arr);
         quickSort(arr);
-        checkSort(arr);
+        for (Integer i : arr) {
+            System.out.print(i + " ");
+        }
+
+//        List<Integer> arr2 = new ArrayList();
+//
+//        for (int i = NUM_ITEMS; i >0; i--)
+//            arr2.add(i);
+//        for(Integer i:arr2){
+//            System.out.print(i+" ");
+//        }
+////        Random.permute(arr2);
+////        Arrays.asList(arr2);
+////        List arrList = new ArrayList(Arrays.asList(arr2));
+////        quickSort2(arr2);
+//        System.out.println();
+//        for(Integer i:arr2){
+//            System.out.print(i+" ");
+//        }
+//        checkSort(arrList);
     }
 }
